@@ -1,0 +1,93 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Taro Custom Style\n"
+"POT-Creation-Date: 2017-07-28 19:40+0900\n"
+"PO-Revision-Date: 2017-07-28 19:39+0900\n"
+"Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
+"Language-Team: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: taro-custom-style.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
+"X-Poedit-SearchPathExcluded-2: assets\n"
+
+#: includes/post-meta-box.php:15 includes/settings.php:14
+#: includes/taxonomy-meta-box.php:12
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/post-meta-box.php:22
+msgid "CSS will be displayed only on this page."
+msgstr ""
+
+#: includes/settings.php:13
+msgid "Taro Custom Style Setting"
+msgstr ""
+
+#: includes/settings.php:21
+msgid "Update"
+msgstr ""
+
+#: includes/settings.php:37
+msgid "Customizable Objects"
+msgstr ""
+
+#: includes/settings.php:39
+msgid "Specified post types or taxonomies have custom css fields."
+msgstr ""
+
+#: includes/settings.php:47
+msgid "Post Types"
+msgstr ""
+
+#: includes/settings.php:68
+msgid "Taxonomies"
+msgstr ""
+
+#: includes/taxonomy-meta-box.php:24
+msgid "Preview"
+msgstr ""
+
+#: includes/taxonomy-meta-box.php:28
+msgid "CSS will be displayed only on taxonomy archive page."
+msgstr ""
+
+#: includes/taxonomy-meta-box.php:76
+msgid "Wrong access."
+msgstr ""
+
+#: includes/taxonomy-meta-box.php:80
+msgid "You have no permission or Term is not allowed to customize."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Taro Custom Style"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugin/taro-custom-style"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Add custom css to each posts and taxonomies."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "TAROSKY INC."
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://tarosky.co.jp"
+msgstr ""
