@@ -1,2 +1,4 @@
 node_modules/
 assets/
+wordpress/
+wp-dependencies.json
