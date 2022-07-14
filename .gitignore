@@ -2,3 +2,5 @@ node_modules/
 assets/
 wordpress/
 wp-dependencies.json
+package-lock.json
+composer.lock
