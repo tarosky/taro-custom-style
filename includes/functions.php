@@ -39,9 +39,9 @@ function tcs_get_taxonomies() {
 }
 
 /**
- * Get taxonomies
+ * Is taxonomy supported?
  *
- * @param array $taxonomy
+ * @param string $taxonomy
  *
  * @return bool
  */
@@ -52,24 +52,36 @@ function tcs_taxonomy_supported( $taxonomy ) {
 /**
  * Enqueue CSS editor
  *
- * @param string $editor_id
- * @param string $textarea_id
+ * @param string $textarea_id Text area.
  */
-function tcs_enqueue_editor( $editor_id, $textarea_id ) {
-	$editor_id = esc_js( $editor_id );
+function tcs_enqueue_editor( $textarea_id, $in_block_editor = false ) {
+	// Enqueue code editor and settings for manipulating HTML.
+	$settings = wp_enqueue_code_editor( [
+		'type'       => 'text/css',
+		'codemirror' => [
+			'autoRefresh' => true,
+		],
+	] );
+
+	// Return if the editor was not enqueued.
+	if ( false === $settings ) {
+		return;
+	}
+
+	// Convert settings to JSON.
 	$textarea_id = esc_js( $textarea_id );
+	$block_editor = $in_block_editor ? 'block-editor' : '';
+	$json = wp_json_encode( $settings );
 	$js = <<<JS
-		(function(){
-			var editor = ace.edit("{$editor_id}");
-    		editor.setTheme("ace/theme/xcode");
-    		editor.getSession().setMode("ace/mode/css");
-    		jQuery(document).ready(function($){
-    			editor.getSession().setValue($('#{$textarea_id}').val());
-				editor.getSession().on('change', function(){
-					$('#{$textarea_id}').val(editor.getSession().getValue());
-				});
-    		});
-		})();
+jQuery( function() {
+	var cm = wp.codeEditor.initialize( '{$textarea_id}', {$json} );
+	if ( 'block-editor' === '{$block_editor}' ) {
+		cm.codemirror.on( 'change', function( args ) {
+			cm.codemirror.save();
+		} );
+	}
+} );
 JS;
-	wp_add_inline_script( 'ace-editor', $js );
+
+	wp_add_inline_script( 'code-editor', $js );
 }

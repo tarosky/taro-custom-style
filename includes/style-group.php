@@ -62,22 +62,9 @@ add_action( 'edit_terms', function( $term_id, $taxonomy ) {
  * Render editor.
  */
 add_action( 'style-group_edit_form', function( $tag, $taxonomy ) {
-	// Enqueue code editor and settings for manipulating HTML.
-	$settings = wp_enqueue_code_editor( [ 'type' => 'text/css' ] );
 
-	// Return if the editor was not enqueued.
-	if ( false === $settings ) {
-		return;
-	}
-
-	// Convert settings to JSON.
-	$json = wp_json_encode( $settings );
-	$js = <<<JS
-jQuery( function() {
-	wp.codeEditor.initialize( 'tcs-editor', {$json} );
-} );
-JS;
-	wp_add_inline_script( 'code-editor', $js );
+	// Enqueue editor.
+	tcs_enqueue_editor( 'tcs-editor' );
 
 	// Nonce.
 	wp_nonce_field( 'update_style', '_tcsnonce', false );
@@ -88,6 +75,9 @@ JS;
 	<?php
 }, 10, 2 );
 
+/**
+ * Render styles.
+ */
 add_action( 'wp_head', function() {
 	$post_types = tcs_get_post_types();
 	if ( empty( $post_types ) || ! is_singular( $post_types ) ) {
