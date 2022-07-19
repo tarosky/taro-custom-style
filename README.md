@@ -2,9 +2,10 @@
 
 Contributors: tarosky, Takahashi_Fumiki, yocchi161  
 Tags: css  
-Requires at least: 4.7.0  
-Tested up to: 4.8.0  
-Stable tag: 1.0.0  
+Requires at least: 5.4  
+Requires PHP: 7.0  
+Tested up to: 6.0  
+Stable Tag: nightly  
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -14,6 +15,9 @@ Add custom CSS meta box to your posts and terms.
 
 Do you need custom CSS for specific page or category?
 So try this plugin and Taro Custom Style gives you meta boxes with Cool editor.
+
+- Custom style for posts and taxonomies.
+- Style group for posts.
 
 ## Installation
 

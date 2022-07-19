@@ -9,7 +9,7 @@ add_action( 'admin_init', function() {
 			?>
 			<tr>
 				<th>
-					<label for="tcs-css"><?php esc_html_e( 'Custom CSS', 'tcs' ) ?></label>
+					<label for="tcs-css"><?php esc_html_e( 'Custom CSS', 'tcs' ); ?></label>
 				</th>
 				<td>
 					<?php
@@ -17,35 +17,35 @@ add_action( 'admin_init', function() {
 						tcs_enqueue_editor( 'tcs-css' );
 					?>
 
-					<textarea name="tcs-css" id="tcs-css"><?php echo esc_textarea( get_term_meta( $term->term_id, '_css', true ) ) ?></textarea>
+					<textarea name="tcs-css" id="tcs-css"><?php echo esc_textarea( get_term_meta( $term->term_id, '_css', true ) ); ?></textarea>
 
 					<p>
-						<button id="tcs-term-preview" data-term-id="<?= esc_attr( $term->term_id ) ?>" data-end-point="<?= esc_attr( admin_url('admin-ajax.php') ) ?>"><?php _e( 'Preview' ) ?></button>
+						<button id="tcs-term-preview" data-term-id="<?php echo esc_attr( $term->term_id ); ?>" data-end-point="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>"><?php _e( 'Preview' ); ?></button>
 					</p>
 
 					<p class="description">
-						<?php esc_html_e( 'This CSS will be applied to the taxonomy archive page.', 'tcs' ) ?>
+						<?php esc_html_e( 'This CSS will be applied to the taxonomy archive page.', 'tcs' ); ?>
 					</p>
 
 					<script>
 						jQuery(document).ready(function($){
-						  $('#tcs-term-preview').click(function(e){
-						    e.preventDefault();
-						    var nonce = $(this).parents('td').find('input[name=_tcsnonce]').val();
-						    var term_id = $(this).attr('data-term-id');
-						    $.post($(this).attr('data-end-point'), {
-						      action: 'tcs_term_preview',
-						      term_id: term_id,
-						      _wpnonce: nonce,
-						      css: $('#tcs-css').val(),
-							  taxonomy: '<?= esc_js( $term->taxonomy ) ?>'
-						    }).done(function(response){
-						      window.open( response.data.url, '_preview' );
-						    }).fail(function(response){
-						      window.alert(response.data.text);
-							});
-						  });
-						});
+							$( '#tcs-term-preview' ).click( function ( e ) {
+								e.preventDefault();
+								var nonce = $( this ).parents( 'td' ).find( 'input[name=_tcsnonce]' ).val();
+								var term_id = $( this ).attr( 'data-term-id' );
+								$.post( $( this ).attr( 'data-end-point' ), {
+									action: 'tcs_term_preview',
+									term_id: term_id,
+									_wpnonce: nonce,
+									css: $( '#tcs-css' ).val(),
+									taxonomy: '<?php echo esc_js( $term->taxonomy ); ?>'
+								} ).done( function ( response ) {
+									window.open( response.data.url, '_preview' );
+								} ).fail( function ( response ) {
+									window.alert( response.data.text );
+								} );
+							} );
+						} );
 					</script>
 				</td>
 			</tr>

@@ -1,6 +1,7 @@
 node_modules/
 assets/
 wordpress/
+vendor/
 wp-dependencies.json
 package-lock.json
 composer.lock

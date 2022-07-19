@@ -14,11 +14,11 @@ add_action( 'admin_menu', function() {
 	add_theme_page( $title, __( 'Custom CSS', 'tcs' ), 'manage_options', 'tcs-setting', function() use ( $title ) {
 		?>
 		<div class="wrap">
-			<h2><?= esc_html( $title ) ?></h2>
-			<form action="<?= admin_url( 'options.php' ) ?>" method="post">
+			<h2><?php echo esc_html( $title ); ?></h2>
+			<form action="<?php echo admin_url( 'options.php' ); ?>" method="post">
 				<?php settings_fields( 'tsc-setting' ); ?>
 				<?php do_settings_sections( 'tsc-setting' ); ?>
-				<?php submit_button( __( 'Update' ) ) ?>
+				<?php submit_button( __( 'Update' ) ); ?>
 			</form>
 		</div>
 		<?php
@@ -52,8 +52,8 @@ add_action( 'admin_init', function() {
 			foreach ( $post_types as $post_type ) {
 				?>
 				<label style="display: inline-block; margin-right: 1em;">
-					<input type="checkbox" name="tcs_post_types[]" value="<?= esc_attr( $post_type->name ) ?>" <?php checked( tcs_post_type_supported( $post_type->name ) ) ?> />
-					<?= esc_html( $post_type->label ) ?>
+					<input type="checkbox" name="tcs_post_types[]" value="<?php echo esc_attr( $post_type->name ); ?>" <?php checked( tcs_post_type_supported( $post_type->name ) ); ?> />
+					<?php echo esc_html( $post_type->label ); ?>
 				</label>
 				<?php
 			}
@@ -73,8 +73,8 @@ add_action( 'admin_init', function() {
 			foreach ( $taxonomies as $taxonomy ) {
 				?>
 				<label style="display: inline-block; margin-right: 1em;">
-					<input type="checkbox" name="tcs_taxonomies[]" value="<?= esc_attr( $taxonomy->name ) ?>" <?php checked( tcs_taxonomy_supported( $taxonomy->name ) ) ?> />
-					<?= esc_html( $taxonomy->label ) ?>
+					<input type="checkbox" name="tcs_taxonomies[]" value="<?php echo esc_attr( $taxonomy->name ); ?>" <?php checked( tcs_taxonomy_supported( $taxonomy->name ) ); ?> />
+					<?php echo esc_html( $taxonomy->label ); ?>
 				</label>
 				<?php
 			}

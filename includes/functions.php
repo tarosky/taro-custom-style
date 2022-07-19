@@ -24,7 +24,7 @@ function tcs_get_post_types() {
  * @return bool
  */
 function tcs_post_type_supported( $post_type ) {
-	return false !== array_search( $post_type, tcs_get_post_types() );
+	return in_array( $post_type, tcs_get_post_types(), true );
 }
 
 /**
@@ -46,7 +46,7 @@ function tcs_get_taxonomies() {
  * @return bool
  */
 function tcs_taxonomy_supported( $taxonomy ) {
-	return false !== array_search( $taxonomy, tcs_get_taxonomies() );
+	return in_array( $taxonomy, tcs_get_taxonomies(), true );
 }
 
 /**
@@ -69,10 +69,10 @@ function tcs_enqueue_editor( $textarea_id, $in_block_editor = false ) {
 	}
 
 	// Convert settings to JSON.
-	$textarea_id = esc_js( $textarea_id );
+	$textarea_id  = esc_js( $textarea_id );
 	$block_editor = $in_block_editor ? 'block-editor' : '';
-	$json = wp_json_encode( $settings );
-	$js = <<<JS
+	$json         = wp_json_encode( $settings );
+	$js           = <<<JS
 jQuery( function() {
 	var cm = wp.codeEditor.initialize( '{$textarea_id}', {$json} );
 	if ( 'block-editor' === '{$block_editor}' ) {

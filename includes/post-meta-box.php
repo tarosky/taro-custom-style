@@ -18,7 +18,7 @@ add_action( 'add_meta_boxes', function( $post_type ) {
 		?>
 		<textarea name="tcs-css" id="tcs-css"><?php echo esc_textarea( get_post_meta( $post->ID, '_css', true ) ); ?></textarea>
 		<p class="description">
-			<?php esc_html_e( 'CSS will be displayed only on this page.', 'tcs' ) ?>
+			<?php esc_html_e( 'CSS will be displayed only on this page.', 'tcs' ); ?>
 		</p>
 
 		<?php
@@ -33,7 +33,7 @@ add_action( 'save_post', function( $post_id, $post ) {
 		return;
 	}
 	if ( wp_is_post_revision( $post ) && wp_is_post_autosave( $post ) ) {
-		$key = '_css_preview';
+		$key     = '_css_preview';
 		$post_id = $post->post_parent;
 	} elseif ( tcs_post_type_supported( $post->post_type ) ) {
 		$key = '_css';

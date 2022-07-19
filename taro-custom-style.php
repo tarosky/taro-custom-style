@@ -8,7 +8,7 @@ Author URI: https://tarosky.co.jp
 Text Domain: tcs
 Domain Path: /languages/
 License: GPL v3 or later.
-Version: 1.0.0
+Version: nightly
 PHP Version: 5.4.0
 */
 
@@ -22,7 +22,13 @@ add_action( 'plugins_loaded', 'taro_custom_style_init' );
  * @access private
  */
 function taro_custom_style_init() {
+	// i18n.
 	load_plugin_textdomain( 'tcs', false, basename( dirname( __FILE__ ) ) . '/languages' );
+	// Load composer if exists.
+	if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+		require_once __DIR__ . '/vendor/autoload.php';
+	}
+	// Load all components.
 	foreach ( scandir( dirname( __FILE__ ) . '/includes' ) as $file ) {
 		if ( preg_match( '#^[^._].*\.php$#u', $file ) ) {
 			require dirname( __FILE__ ) . '/includes/' . $file;
@@ -40,7 +46,7 @@ function taro_custom_style_init() {
 function taro_custom_style_version() {
 	static $version = null;
 	if ( is_null( $version ) ) {
-		$info = get_file_data( __FILE__, [
+		$info    = get_file_data( __FILE__, [
 			'version' => 'Version',
 		] );
 		$version = $info['version'];
