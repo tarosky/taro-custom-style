@@ -31,9 +31,10 @@ add_action( 'wp_head', function() {
 	 * @param WP_Term|WP_Post $queried_object Current page's object. TErm or Post.
 	 */
 	$css = apply_filters( 'tcs_css_output', $css, get_queried_object() );
+	$css = esc_html( $css );
 	if ( $css ) {
 			echo <<<HTML
-<style type="text/css">
+<style>
 {$css}
 </style>
 HTML;
