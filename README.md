@@ -3,7 +3,7 @@
 Contributors: tarosky, Takahashi_Fumiki, yocchi161  
 Tags: css  
 Requires at least: 5.4  
-Requires PHP: 7.0  
+Requires PHP: 7.2  
 Tested up to: 6.0  
 Stable Tag: nightly  
 License: GPLv3 or later  
