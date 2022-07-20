@@ -85,3 +85,77 @@ JS;
 
 	wp_add_inline_script( 'code-editor', $js );
 }
+
+/**
+ * Sanitize CSS
+ *
+ * @param string $css
+ * @return string|WP_Error
+ */
+function tcs_sanitize_css( $css ) {
+	// Strip tags.
+	$css = wp_kses( $css, [] );
+
+	// Start parsing.
+	$parser     = \Wikimedia\CSS\Parser\Parser::newFromString( $css );
+	$stylesheet = $parser->parseStylesheet();
+
+	// Check syntax error.
+	$errors = new WP_Error();
+	foreach ( $parser->getParseErrors() as list( $code, $line, $pos ) ) {
+		// translators: %1$s is error code, %2$d is line number, %3$d is char position.
+		$errors->add( 'css_parse_error', sprintf( __( 'CSS Parse Error: %1$s at line %2$d char %3$d', 'tcs' ), $code, $line, $pos ) );
+	}
+	if ( $errors->get_error_messages() ) {
+		return $errors;
+	}
+
+	// Sanitize stylesheet.
+	$sanitizer     = \Wikimedia\CSS\Sanitizer\StylesheetSanitizer::newDefault();
+	$sanitized_css = $sanitizer->sanitize( $stylesheet );
+
+	/** Report any sanitizer errors **/
+
+	foreach ( $sanitizer->getSanitizationErrors() as list( $code, $line, $pos ) ) {
+		// translators: %1$s is error code, %2$d is line number, %3$d is char position.
+		$errors->add( 'css_sanitize_error', sprintf( __( 'CSS Sanitize Error: %1$s at line %2$d char %3$d', 'tcs' ), $code, $line, $pos ) );
+	}
+
+	if ( $errors->get_error_messages() ) {
+		return $errors;
+	}
+
+	// No error.
+	return (string) $sanitized_css;
+}
+
+/**
+ * Render style tag if no error.
+ *
+ * @param string $style Style tag contents.
+ * @param string $id    ID attribute for style tag.
+ *
+ * @return void
+ */
+function tcs_display_style( $style, $id ) {
+	$style = tcs_sanitize_css( $style );
+	if ( is_wp_error( $style ) ) {
+		// No style tag output.
+		// Display error messages as HTML comment and quit.
+		echo '<!-- Taro Custom Style Error: ' . esc_html( $id ) . "\n";
+		foreach ( $style->get_error_messages() as $message ) {
+			echo esc_html( $message ) . "\n";
+		}
+		echo '-->';
+		return;
+	}
+	?>
+	<style id="<?php echo esc_attr( $id ); ?>">
+		<?php
+		// Output sanitized style.
+		echo $style;
+		?>
+	</style>
+
+	<?php
+}

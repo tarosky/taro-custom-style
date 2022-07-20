@@ -20,7 +20,8 @@
 		}
 	],
 	"require": {
-		"php": "^5.6|^7.0|^8.0"
+		"php": "^5.6|^7.0|^8.0",
+		"wikimedia/css-sanitizer": "^4.0"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "^3.0",

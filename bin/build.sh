@@ -9,7 +9,7 @@ VERSION=${1#"$PREFIX"}
 echo "Building Taro Programmable Search v${VERSION}..."
 
 # Install composer.
-#composer install --no-dev --prefer-dist
+composer install --no-dev --prefer-dist
 
 # Install NPM.
 #npm install

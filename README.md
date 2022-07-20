@@ -17,7 +17,7 @@ Do you need custom CSS for specific page or category?
 So try this plugin and Taro Custom Style gives you meta boxes with Cool editor.
 
 - Custom style for posts and taxonomies.
-- Style group for posts.
+- Style group for posts. A style group is a custom CSS which can be attahed to multiple posts.
 
 ## Installation
 
@@ -37,6 +37,11 @@ We host our code on [Github](https://github.com/tarosky/taro-custom-style), so f
 W.I.P
 
 ## Changelog
+
+### 1.1.0
+
+- Add style group.
+- Add stronger sanitization with [Media Wiki css-sanitizer](https://www.mediawiki.org/wiki/Css-sanitizer).
 
 ### 1.0.0
 

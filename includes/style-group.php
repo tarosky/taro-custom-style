@@ -24,7 +24,7 @@ add_action( 'init', function() {
 		'show_tagcloud'      => false,
 		'show_in_quick_edit' => false,
 		'labels'             => [
-			'parent_field_description' => esc_html__( 'Parent styles will be loaded with this style.', 'lsp' ),
+			'parent_field_description' => esc_html__( 'Parent styles will be loaded with this style.', 'tcs' ),
 		],
 	] );
 } );
@@ -99,16 +99,11 @@ add_action( 'wp_head', function() {
 		}
 		$all_styles[ $style->term_id ] = $style;
 	}
-	foreach ( $all_styles as $style ) {
+	foreach ( $all_styles as $term_id => $style ) {
 		$style = get_term_meta( $style->term_id, 'tcs_style', true );
 		if ( ! $style ) {
 			continue;
 		}
-		?>
-		<style>
-		<?php echo esc_html( $style ); ?>
-		</style>
-
-		<?php
+		tcs_display_style( $style, 'tcs-style-group-' . $term_id );
 	}
 }, 9999 );

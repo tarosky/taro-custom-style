@@ -11,6 +11,7 @@ add_action( 'wp_head', function() {
 		}
 		$key = is_preview() ? '_css_preview' : '_css';
 		$css = get_post_meta( get_queried_object_id(), $key, true );
+		$id  = 'tcs-post-style-' . get_queried_object_id();
 	} elseif ( is_category() || is_tag() || is_tax() ) {
 		$term = get_queried_object();
 		if ( ! tcs_taxonomy_supported( $term->taxonomy ) ) {
@@ -21,6 +22,7 @@ add_action( 'wp_head', function() {
 			$key .= '_preview';
 		}
 		$css = get_term_meta( $term->term_id, $key, true );
+		$id  = 'tcs-taxonomy-style-' . get_queried_object_id();
 	} else {
 		return;
 	}
@@ -31,12 +33,10 @@ add_action( 'wp_head', function() {
 	 * @param WP_Term|WP_Post $queried_object Current page's object. TErm or Post.
 	 */
 	$css = apply_filters( 'tcs_css_output', $css, get_queried_object() );
-	$css = esc_html( $css );
-	if ( $css ) {
-			echo <<<HTML
-<style>
-{$css}
-</style>
-HTML;
+	$css = tcs_sanitize_css( $css );
+	if ( empty( $css ) ) {
+		// No CSS.
+		return;
 	}
+	tcs_display_style( $css, $id );
 }, 100 );

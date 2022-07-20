@@ -1,34 +1,46 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Taro Custom Style\n"
-"POT-Creation-Date: 2017-07-28 19:40+0900\n"
+"POT-Creation-Date: 2022-07-20 17:35+0900\n"
 "PO-Revision-Date: 2017-07-28 19:39+0900\n"
 "Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
 "Language-Team: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: taro-custom-style.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 "X-Poedit-SearchPathExcluded-2: assets\n"
+"X-Poedit-SearchPathExcluded-3: vendor\n"
+"X-Poedit-SearchPathExcluded-4: wordpress\n"
+
+#: includes/functions.php:107
+#, php-format
+msgid "CSS Parse Error: %1$s at line %2$d char %3$d"
+msgstr ""
+
+#: includes/functions.php:121
+#, php-format
+msgid "CSS Sanitize Error: %1$s at line %2$d char %3$d"
+msgstr ""
 
 #: includes/post-meta-box.php:15 includes/settings.php:14
 #: includes/taxonomy-meta-box.php:12
 msgid "Custom CSS"
 msgstr ""
 
-#: includes/post-meta-box.php:22
+#: includes/post-meta-box.php:21
 msgid "CSS will be displayed only on this page."
 msgstr ""
 
@@ -56,19 +68,27 @@ msgstr ""
 msgid "Taxonomies"
 msgstr ""
 
-#: includes/taxonomy-meta-box.php:24
+#: includes/style-group.php:19
+msgid "Style Group"
+msgstr ""
+
+#: includes/style-group.php:27
+msgid "Parent styles will be loaded with this style."
+msgstr ""
+
+#: includes/taxonomy-meta-box.php:23
 msgid "Preview"
 msgstr ""
 
-#: includes/taxonomy-meta-box.php:28
-msgid "CSS will be displayed only on taxonomy archive page."
+#: includes/taxonomy-meta-box.php:27
+msgid "This CSS will be applied to the taxonomy archive page."
 msgstr ""
 
-#: includes/taxonomy-meta-box.php:76
+#: includes/taxonomy-meta-box.php:77
 msgid "Wrong access."
 msgstr ""
 
-#: includes/taxonomy-meta-box.php:80
+#: includes/taxonomy-meta-box.php:81
 msgid "You have no permission or Term is not allowed to customize."
 msgstr ""
 

@@ -25,9 +25,7 @@ function taro_custom_style_init() {
 	// i18n.
 	load_plugin_textdomain( 'tcs', false, basename( dirname( __FILE__ ) ) . '/languages' );
 	// Load composer if exists.
-	if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
-		require_once __DIR__ . '/vendor/autoload.php';
-	}
+	require_once __DIR__ . '/vendor/autoload.php';
 	// Load all components.
 	foreach ( scandir( dirname( __FILE__ ) . '/includes' ) as $file ) {
 		if ( preg_match( '#^[^._].*\.php$#u', $file ) ) {
