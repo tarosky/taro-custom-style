@@ -129,7 +129,7 @@ jobs:
           rm ${{ github.event.repository.name }}.zip
           cd ../
           echo "Cloning $GITHUB_REPOSITORY"
-          git clone https://github.com/$GITHUB_REPOSITORY.git release
+          git clone https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git release
           cd release
           git checkout -b release
           cd ../
