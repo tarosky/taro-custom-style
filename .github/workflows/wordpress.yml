@@ -131,9 +131,12 @@ jobs:
           echo "Cloning $GITHUB_REPOSITORY"
           git clone https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git release
           cd release
+          echo "Setup git config..."
+          git config --local user.name $GITHUB_ACTOR
+          git config --local user.email action@github.com
           git checkout -b release
           cd ../
-          echo "Syncing Repo"
+          echo "Syncing Repo..."
           rsync -rlptv --delete --exclude=.git src/ release
           cd release
           echo "Committing"
