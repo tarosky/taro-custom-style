@@ -117,3 +117,23 @@ jobs:
           asset_path: ${{ github.workspace }}/${{ github.event.repository.name }}.zip
           asset_name: ${{ github.event.repository.name }}.zip
           asset_content_type: application/zip
+
+      - name: Create Release Branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir src
+          mv ${{ github.event.repository.name }}.zip src/
+          cd src
+          unzip ${{ github.event.repository.name }}.zip
+          rm ${{ github.event.repository.name }}.zip
+          cd ../
+          git checkout git@github.com:${{ github.repository }}.git release
+          cd release
+          git checkout -b release
+          cd ../
+          rsync -rlptv --delete --exclude=.git src/ release
+          cd release
+          git add .
+          git commit -m "Create Release ${{ github.ref }}"
+          git push origin release
