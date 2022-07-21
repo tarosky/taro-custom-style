@@ -133,8 +133,11 @@ jobs:
           cd release
           git checkout -b release
           cd ../
+          echo "Syncing Repo"
           rsync -rlptv --delete --exclude=.git src/ release
           cd release
+          echo "Committing"
           git add .
           git commit -m "Create Release ${{ github.ref }}"
+          echo "Pushing to release branch"
           git push origin release
