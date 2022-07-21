@@ -128,8 +128,8 @@ jobs:
           unzip ${{ github.event.repository.name }}.zip
           rm ${{ github.event.repository.name }}.zip
           cd ../
-          echo "Cloning {GITHUB_REPOSITORY}"
-          git checkout git@github.com:{$GITHUB_REPOSITORY}.git release
+          echo "Cloning {$GITHUB_REPOSITORY}"
+          git clone git@github.com:{$GITHUB_REPOSITORY}.git release
           cd release
           git checkout -b release
           cd ../
