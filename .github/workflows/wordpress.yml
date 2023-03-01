@@ -62,7 +62,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Install Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '14'
 
@@ -91,7 +91,7 @@ jobs:
 
 
       - name: Install Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '14'
 
@@ -141,8 +141,7 @@ jobs:
           echo "Setup git config..."
           git config --local user.name $GITHUB_ACTOR
           git config --local user.email action@github.com
-          git checkout -b release
-          git pull origin release --rebase
+          git checkout -b release origin/release
           cd ../
           echo "Syncing Repo..."
           rsync -rlptv --delete --exclude=.git src/ release
