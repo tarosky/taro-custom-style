@@ -69,7 +69,7 @@ add_action( 'edit_terms', function( $term_id, $taxonomy ) {
  * @param WP_Term $tag
  * @param string  $taxonomy
  */
-add_action( "style-group_edit_form_fields", function( $tag, $taxonomy ) {
+add_action( 'style-group_edit_form_fields', function( $tag, $taxonomy ) {
 	?>
 	<tr>
 		<th><?php esc_html_e( 'CSS Sanitize', 'tcs' ); ?></th>
