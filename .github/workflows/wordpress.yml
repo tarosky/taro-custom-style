@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
-        operating-system: [ ubuntu-18.04 ]  # OS. ubuntu-18.04 is also available.
+        operating-system: [ ubuntu-20.04 ]  # OS. ubuntu-18.04 is also available.
         php: [ '7.2', '7.4', '8.1' ] # PHP versions to check.
         wp: [ 'latest', '5.9' ]      # WordPress version to check.
     services:
