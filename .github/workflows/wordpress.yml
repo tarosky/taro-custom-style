@@ -17,7 +17,7 @@ jobs:
       matrix:
         operating-system: [ ubuntu-18.04 ]  # OS. ubuntu-18.04 is also available.
         php: [ '7.2', '7.4', '8.1' ] # PHP versions to check.
-        wp: [ 'latest', '5.4' ]      # WordPress version to check.
+        wp: [ 'latest', '5.9' ]      # WordPress version to check.
     services:
       mysql:
         image: mysql:5.7
@@ -34,7 +34,9 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          tools: composer:v2.2
+          tools: composer
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Validate composer.json and composer.lock
         run: composer validate
@@ -43,7 +45,9 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Start MySQL
-        run: sudo systemctl start mysql
+        run: |
+          sudo systemctl start mysql
+          mysql -h 127.0.0.1 --port 3306 -u root --password=root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
       - name: Install WordPress
         run: bash bin/install-wp-tests.sh wordpress root root 127.0.0.1:3306 ${{ matrix.wp }}
@@ -53,7 +57,7 @@ jobs:
 
   assets:
     name: Assets Test
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@master
 
@@ -72,7 +76,7 @@ jobs:
     name: Deploy WordPress.org
     needs: [ test, assets ]
     if: contains(github.ref, 'tags/')
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -81,7 +85,10 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 7.2
-          tools: composer:v2.2
+          tools: composer
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Install Node
         uses: actions/setup-node@v1

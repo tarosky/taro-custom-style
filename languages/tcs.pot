@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Taro Custom Style\n"
-"POT-Creation-Date: 2022-07-20 17:35+0900\n"
+"POT-Creation-Date: 2023-03-01 16:01+0900\n"
 "PO-Revision-Date: 2017-07-28 19:39+0900\n"
 "Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
 "Language-Team: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: taro-custom-style.php\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "CSS Parse Error: %1$s at line %2$d char %3$d"
 msgstr ""
 
-#: includes/functions.php:121
+#: includes/functions.php:116
 #, php-format
 msgid "CSS Sanitize Error: %1$s at line %2$d char %3$d"
 msgstr ""
@@ -74,6 +74,22 @@ msgstr ""
 
 #: includes/style-group.php:27
 msgid "Parent styles will be loaded with this style."
+msgstr ""
+
+#: includes/style-group.php:75
+msgid "CSS Sanitize"
+msgstr ""
+
+#: includes/style-group.php:79
+msgid "Explicitly ignore sanitizer."
+msgstr ""
+
+#: includes/style-group.php:101
+msgid "Save and check syntax error."
+msgstr ""
+
+#: includes/style-group.php:111
+msgid "This CSS has no error."
 msgstr ""
 
 #: includes/taxonomy-meta-box.php:23
