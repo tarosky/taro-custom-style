@@ -142,7 +142,7 @@ jobs:
           git config --local user.name $GITHUB_ACTOR
           git config --local user.email action@github.com
           git checkout -b release
-          git pull origin release
+          git pull origin release --rebase
           cd ../
           echo "Syncing Repo..."
           rsync -rlptv --delete --exclude=.git src/ release
