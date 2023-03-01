@@ -5,7 +5,7 @@ Tags: css
 Requires at least: 5.4  
 Requires PHP: 7.2  
 Tested up to: 6.0  
-Stable Tag: 1.1.11
+Stable Tag: 1.1.15
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
