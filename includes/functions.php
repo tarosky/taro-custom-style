@@ -89,55 +89,27 @@ JS;
 /**
  * Sanitize CSS
  *
+ * @deprecated
  * @param string $css
- * @return string|WP_Error
+ * @return string
  */
 function tcs_sanitize_css( $css ) {
-	// Strip tags. This will mal-affect to css sanitizer.
-	//$css           = wp_kses( $css, [] );
-	$sanitized_css = '';
-	// Start parsing.
-	$parser     = \Wikimedia\CSS\Parser\Parser::newFromString( $css );
-	$stylesheet = $parser->parseStylesheet();
-
-	// Check syntax error.
-	$errors = new WP_Error();
-	foreach ( $parser->getParseErrors() as list( $code, $line, $pos ) ) {
-		// translators: %1$s is error code, %2$d is line number, %3$d is char position.
-		$errors->add( 'css_parse_error', sprintf( __( 'CSS Parse Error: %1$s at line %2$d char %3$d', 'tcs' ), $code, $line, $pos ) );
-	}
-	if ( ! $errors->get_error_messages() ) {
-		// Sanitize stylesheet.
-		$sanitizer     = \Wikimedia\CSS\Sanitizer\StylesheetSanitizer::newDefault();
-		$sanitized_css = $sanitizer->sanitize( $stylesheet );
-		/** Report any sanitizer errors **/
-		foreach ( $sanitizer->getSanitizationErrors() as list( $code, $line, $pos ) ) {
-			// translators: %1$s is error code, %2$d is line number, %3$d is char position.
-			$errors->add( 'css_sanitize_error', sprintf( __( 'CSS Sanitize Error: %1$s at line %2$d char %3$d', 'tcs' ), $code, $line, $pos ) );
-		}
-	}
-
-	if ( $errors->get_error_messages() ) {
-		return $errors;
-	}
-
-	// No error.
-	return (string) $sanitized_css;
+	// Remove script tag.
+	$css = preg_replace( '/<script[^>]*?>/u', '', $css );
+	$css = str_replace( '</script>', '', $css );
+	return $css;
 }
 
 /**
  * Render style tag if no error.
  *
- * @param string $style          Style tag contents.
- * @param string $id             ID attribute for style tag.
- * @param bool   $skip_sanitizer If set true, skip sanitizer.
+ * @param string $style      Style tag contents.
+ * @param string $id         ID attribute for style tag.
+ * @param bool   $deprecated Deprecated option.
  *
  * @return void
  */
-function tcs_display_style( $style, $id, $skip_sanitizer = false ) {
-	if ( ! $skip_sanitizer ) {
-		$style = tcs_sanitize_css( $style );
-	}
+function tcs_display_style( $style, $id, $deprecated = false ) {
 	if ( is_wp_error( $style ) ) {
 		// No style tag output.
 		// Display error messages as HTML comment and quit.

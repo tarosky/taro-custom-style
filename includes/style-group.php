@@ -56,31 +56,6 @@ add_action( 'edit_terms', function( $term_id, $taxonomy ) {
 		return;
 	}
 	update_term_meta( $term_id, 'tcs_style', filter_input( INPUT_POST, 'tcs_style' ) );
-	if ( filter_input( INPUT_POST, 'tcs_ignore_sanitizer' ) ) {
-		update_term_meta( $term_id, '_ignore_sanitizer', 1 );
-	} else {
-		delete_term_meta( $term_id, '_ignore_sanitizer' );
-	}
-}, 10, 2 );
-
-/**
- * Add field.
- *
- * @param WP_Term $tag
- * @param string  $taxonomy
- */
-add_action( 'style-group_edit_form_fields', function( $tag, $taxonomy ) {
-	?>
-	<tr>
-		<th><?php esc_html_e( 'CSS Sanitize', 'tcs' ); ?></th>
-		<td>
-			<label>
-				<input type="checkbox" value="1" name="tcs_ignore_sanitizer" <?php checked( get_term_meta( $tag->term_id, '_ignore_sanitizer', true ), '1' ); ?> />
-				<?php esc_html_e( 'Explicitly ignore sanitizer.', 'tcs' ); ?>
-			</label>
-		</td>
-	</tr>
-	<?php
 }, 10, 2 );
 
 /**
@@ -97,19 +72,7 @@ add_action( 'style-group_edit_form', function( $tag, $taxonomy ) {
 	<div class="style-editor-wrapper">
 		<textarea class="style-editor" id="tcs-editor" name="tcs_style"><?php echo esc_textarea( $css ); ?></textarea>
 	</div>
-	<p class="description">
-		<?php esc_html_e( 'Save and check syntax error.', 'tcs' ); ?>
-	</p>
 	<?php
-	$result = tcs_sanitize_css( $css );
-	if ( is_wp_error( $result ) ) {
-		$list = array_map( function( $message ) {
-			return sprintf( '<li>%s</li>', esc_html( $message ) );
-		}, $result->get_error_messages() );
-		printf( '<ol style="color: red; margin: 10px 10px 10px 40px;">%s</ol>', implode( "\n", $list ) );
-	} else {
-		printf( '<p style="color:green;"><span class="dashicons dashicons-yes"></span> %s</p>', esc_html__( 'This CSS has no error.', 'tsc' ) );
-	}
 }, 10, 2 );
 
 /**
