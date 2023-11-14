@@ -50,6 +50,27 @@ function tcs_taxonomy_supported( $taxonomy ) {
 }
 
 /**
+ * Get object to display style in current page.
+ *
+ * @return WP_Term|WP_Post|null
+ */
+function tcs_style_for_object() {
+	$object = null;
+	if ( is_single() || is_page() || is_singular() ) {
+		$post_type = get_queried_object()->post_type;
+		if ( tcs_post_type_supported( $post_type ) ) {
+			$object = get_queried_object();
+		}
+	} elseif ( is_category() || is_tag() || is_tax() ) {
+		$term = get_queried_object();
+		if ( ! tcs_taxonomy_supported( $term->taxonomy ) ) {
+			$object = $term;
+		}
+	}
+	return apply_filters( 'tcs_object_for_style', $object );
+}
+
+/**
  * Enqueue CSS editor
  *
  * @param string $textarea_id Text area.
@@ -103,9 +124,9 @@ function tcs_sanitize_css( $css ) {
 /**
  * Render style tag if no error.
  *
- * @param string $style      Style tag contents.
- * @param string $id         ID attribute for style tag.
- * @param bool   $deprecated Deprecated option.
+ * @param string|WP_Error $style      Style tag contents.
+ * @param string          $id         ID attribute for style tag.
+ * @param bool            $deprecated Deprecated option.
  *
  * @return void
  */
@@ -129,4 +150,21 @@ function tcs_display_style( $style, $id, $deprecated = false ) {
 	</style>
 
 	<?php
+}
+
+/**
+ * Get style group to render.
+ *
+ * @return WP_Term[]
+ */
+function tcs_get_style_group() {
+	$styles     = [];
+	$post_types = tcs_get_post_types();
+	if ( $post_types && is_singular( $post_types ) ) {
+		$terms = get_the_terms( get_queried_object(), 'style-group' );
+		if ( $terms && ! is_wp_error( $terms ) ) {
+			$styles = $terms;
+		}
+	}
+	return apply_filters( 'tcs_style_groups', $styles );
 }

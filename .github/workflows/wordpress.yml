@@ -11,55 +11,17 @@ on:
       - master
 
 jobs:
-  test:
-    runs-on: ${{ matrix.operating-system }}
-    strategy:
-      matrix:
-        operating-system: [ ubuntu-20.04 ]  # OS. ubuntu-18.04 is also available.
-        php: [ '7.2', '7.4', '8.1' ] # PHP versions to check.
-        wp: [ 'latest', '5.9' ]      # WordPress version to check.
-    services:
-      mysql:
-        image: mysql:5.7
-        options: --health-cmd "mysqladmin ping --host 127.0.0.1 --port 3306" --health-interval 20s --health-timeout 10s --health-retries 10
-        ports:
-          - 3306/tcp
-        env:
-          MYSQL_ROOT_PASSWORD: root
-    name: WordPress ${{ matrix.wp }} in PHP ${{ matrix.php }} UnitTest
-    steps:
-      - uses: actions/checkout@master
-
-      - name: Setup PHP with composer v2
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          tools: composer
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Validate composer.json and composer.lock
-        run: composer validate
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-
-      - name: Start MySQL
-        run: |
-          sudo systemctl start mysql
-          mysql -h 127.0.0.1 --port 3306 -u root --password=root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
-
-      - name: Install WordPress
-        run: bash bin/install-wp-tests.sh wordpress root root 127.0.0.1:3306 ${{ matrix.wp }}
-
-      - name: Check PHP syntax
-        run: composer test
+  lint:
+    name: Check PHP Codes
+    uses: tarosky/workflows/.github/workflows/phpcs.yml@main
+    with:
+      version: 7.4
 
   assets:
     name: Assets Test
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
 
       - name: Install Node
         uses: actions/setup-node@v3
@@ -74,21 +36,20 @@ jobs:
 
   release:
     name: Deploy WordPress.org
-    needs: [ test, assets ]
+    needs: [ lint, assets ]
     if: contains(github.ref, 'tags/')
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@vmain
 
       - name: Setup PHP with composer v2
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.2
+          php-version: 7.4
           tools: composer
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 
       - name: Install Node
         uses: actions/setup-node@v3
