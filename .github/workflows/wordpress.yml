@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@vmain
+        uses: actions/checkout@main
 
       - name: Setup PHP with composer v2
         uses: shivammathur/setup-php@v2
