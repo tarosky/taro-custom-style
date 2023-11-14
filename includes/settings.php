@@ -9,7 +9,6 @@
  * Add menu's sub page
  */
 add_action( 'admin_menu', function() {
-
 	$title = __( 'Taro Custom Style Setting', 'tcs' );
 	add_theme_page( $title, __( 'Custom CSS', 'tcs' ), 'manage_options', 'tcs-setting', function() use ( $title ) {
 		?>
