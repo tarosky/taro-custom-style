@@ -79,15 +79,7 @@ add_action( 'style-group_edit_form', function( $tag, $taxonomy ) {
  * Render styles.
  */
 add_action( 'wp_head', function() {
-	$post_types = tcs_get_post_types();
-	if ( empty( $post_types ) || ! is_singular( $post_types ) ) {
-		return;
-	}
-	// Get styles.
-	$styles = get_the_terms( get_queried_object(), 'style-group' );
-	if ( ! $styles || is_wp_error( $styles ) ) {
-		return;
-	}
+	$styles     = tcs_get_style_group();
 	$all_styles = [];
 	foreach ( $styles as $style ) {
 		$ancestors = get_ancestors( $style->term_id, $style->taxonomy, 'taxonomy' );
