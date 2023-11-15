@@ -63,7 +63,7 @@ function tcs_style_for_object() {
 		}
 	} elseif ( is_category() || is_tag() || is_tax() ) {
 		$term = get_queried_object();
-		if ( ! tcs_taxonomy_supported( $term->taxonomy ) ) {
+		if ( tcs_taxonomy_supported( $term->taxonomy ) ) {
 			$object = $term;
 		}
 	}
