@@ -34,7 +34,6 @@ add_action( 'save_post', function( $post_id, $post, $update ) {
 	}
 
 	if ( wp_is_post_revision( $post ) && wp_is_post_autosave( $post ) ) {
-		error_log( 'AAAAA' );
 		// Post already published, when viewing update preview.
 		$keys    = [ '_css_preview' ];
 		$post_id = $post->post_parent;
