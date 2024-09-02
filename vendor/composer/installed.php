@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'tarosky/taro-custom-style',
-        'pretty_version' => '1.1.18',
-        'version' => '1.1.18.0',
-        'reference' => '3155c202a3a51bbfed7a6ef64b88f0af53de7823',
+        'pretty_version' => '1.1.19',
+        'version' => '1.1.19.0',
+        'reference' => '53b24b5a808554011378817fee41afb7306c39d0',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'tarosky/taro-custom-style' => array(
-            'pretty_version' => '1.1.18',
-            'version' => '1.1.18.0',
-            'reference' => '3155c202a3a51bbfed7a6ef64b88f0af53de7823',
+            'pretty_version' => '1.1.19',
+            'version' => '1.1.19.0',
+            'reference' => '53b24b5a808554011378817fee41afb7306c39d0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
