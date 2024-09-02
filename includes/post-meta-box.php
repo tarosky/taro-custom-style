@@ -16,7 +16,7 @@ add_action( 'add_meta_boxes', function( $post_type ) {
 		wp_nonce_field( 'tcs_post_css', '_tcsnonce', false );
 		tcs_enqueue_editor( 'tcs-css', get_current_screen()->is_block_editor() );
 		?>
-		<textarea name="tcs-css" id="tcs-css"><?php echo esc_textarea( get_post_meta( $post->ID, '_css', true ) ); ?></textarea>
+		<textarea name="tcs-css" id="tcs-css" style="width: 100%; min-height: 10em; field-sizing: content;"><?php echo esc_textarea( get_post_meta( $post->ID, '_css', true ) ); ?></textarea>
 		<p class="description">
 			<?php esc_html_e( 'CSS will be displayed only on this page.', 'tcs' ); ?>
 		</p>
